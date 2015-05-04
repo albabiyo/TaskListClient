@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tasks List</title>
+        <script type="text/javascript" src="scripts/lib/angular.min.js"></script>
+    </head>
+    <body ng-app='TaskList'>
+        <div id="todoapp" ng-controller="TasksCtrl">
+            <!--Add Task-->
+            <div>
+                <input type="text" name="add-task" placeholder="Add your task here" ng-model="taskName"/>
+                <button ng-click="addTask()">Add</button>
+ 
+            </div> 
+            <!--Task list-->
+            <ul id="todo-list">
+                <li ng-repeat="task in tasklist">
+                    <span>{{task.name}}
+                    <button ng-click="deleteTask(tasklist.indexOf(task))">Delete</button>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="scripts/app.js"></script>
+    </body>
+</html>
