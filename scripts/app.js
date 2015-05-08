@@ -10,7 +10,7 @@ angular.module('TaskList', [])
     }
     
     $scope.addTask = function(newTask) {
-        $http.post('http://52.24.38.84:8080/Tasks', {des: newTask}).success(function () {
+        $http.post('http://52.24.38.84:8080/Tasks', {des : newTask}).success(function () {
             refresh();
         })
          $scope.taskName = "";
