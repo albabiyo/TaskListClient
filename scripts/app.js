@@ -1,16 +1,25 @@
 angular.module('TaskList', [])
 
-.controller('TasksCtrl', ['$scope', function($scope) {
+.controller('TasksCtrl', function ($scope, $http) {
     $scope.tasklist = [];
     
-    $scope.addTask = function() {
-        if($scope.taskName) {
-            $scope.tasklist.push({"name": $scope.taskName});   
-            $scope.taskName = "";
-        }
+     function refresh() {
+        $http.get('/Tasks').success(function (data, status, headers, config) {
+            $scope.tasklist = data;
+        });
+    }
+    
+    $scope.addTask = function(newTask) {
+        $http.post('/Tasks', {des: newTask}).success(function () {
+            refresh();
+        })
+         $scope.taskName = "";
+    };
     }
 
-    $scope.deleteTask = function(index) {
-        $scope.tasklist.splice(index, 1);
-    }
-}])
+     $scope.deleteTask = function (task) {
+        $http.delete('/Tasks/' + task.id).success(function () {
+            refresh();
+        });
+    };
+});
